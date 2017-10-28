@@ -13,13 +13,13 @@ class FirstJUnit5Tests {
 
 	@Test
 	void test() {
-		assertEquals(2, 1 + 3);
+		assertEquals(4, 1 + 3);
 	}
 	
-	@RepeatedTest(name="The Repeate Name", value=10 )
+	@RepeatedTest(name="The Repeat Name", value=10 )
 	@DisplayName("This is the name")
 	void repeatTest() {
-		assertEquals( 4, 2 + 1, "These didn't equal");
+		assertEquals( 3, 2 + 1, "These didn't equal");
 		
 	}
 
