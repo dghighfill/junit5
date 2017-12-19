@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,8 +34,7 @@ public class ContainerFactoryTest {
 	@Test
 	@DisplayName("Should NOT be able to create a container if ingredients are invalid.")
 	void getNullContainer() {
-		List<Ingredient> ingredients = Arrays.asList(new Ingredient("peanutButter"), new Ingredient("banana"),
-				new Ingredient("spinanch"), new Ingredient("orange juice"));
+		List<Ingredient> ingredients = Collections.<Ingredient>emptyList();
 		
 		assertThatExceptionOfType(ContainerNotFoundException.class).isThrownBy(() -> {
 			factory.getContainer(ingredients);
