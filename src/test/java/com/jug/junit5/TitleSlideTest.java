@@ -11,14 +11,13 @@ import org.junit.jupiter.api.Test;
 
 class TitleSlideTest {
 
-	private List<String> speakers = Arrays.asList("Frank Motley", "Dale Highfill");
+	private String speaker = "Dale Highfill";
 	private int slideCount = 35;
 
 	@Test
-	@DisplayName("Your presenters tonight are")
+	@DisplayName("Your presenter is")
 	void testForGreatSpeakers() {
-		assertThat(speakers.get(0)).isEqualTo("Frank Motley");
-		assertThat(speakers.get(1)).isEqualTo("Dale Highfill");
+		assertThat(speaker).isEqualTo("Dale Highfill");
 	}
 
 	// Note this test is made to intentionally fail because we bore them to death with

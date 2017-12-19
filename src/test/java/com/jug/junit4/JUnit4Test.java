@@ -1,4 +1,4 @@
-package com.jug.junit5;
+package com.jug.junit4;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
