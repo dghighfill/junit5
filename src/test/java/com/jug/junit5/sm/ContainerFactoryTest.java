@@ -23,7 +23,7 @@ class ContainerFactoryTest {
 	
 	@Test
 	void testGetContainer() {
-		IContainer container = factory.getContainer( Collections.EMPTY_LIST );
+		IContainer container = factory.getContainer( Collections.emptyList() );
 		assertThat( container ).isNull();
 	}
 }
