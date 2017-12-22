@@ -33,7 +33,7 @@ public class ContainerFactory {
 		return containers.size();
 	}
 
-	public int areDinkyContainerAvaiable() {
+	public int areDinkyContainersAvaiable() {
 		int count = 0;
 		for (IContainer iContainer : containers) {
 			if (iContainer instanceof Dinky) {
@@ -43,7 +43,7 @@ public class ContainerFactory {
 		return count;
 	}
 
-	public int areStandardContainerAvaiable() {
+	public int areStandardContainersAvaiable() {
 		int count = 0;
 		for (IContainer iContainer : containers) {
 			if (iContainer instanceof Standard) {
@@ -53,7 +53,7 @@ public class ContainerFactory {
 		return count;
 	}
 
-	public int areGargantuanContainerAvaiable() {
+	public int areGargantuanContainersAvaiable() {
 		int count = 0;
 		for (IContainer iContainer : containers) {
 			if (iContainer instanceof Gargantuan) {

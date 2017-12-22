@@ -1,8 +1,9 @@
-package com.jug.junit5.sm.ex3;
+package com.jug.junit5.sm.ex5;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.mockito.Mockito.when;
 
@@ -24,6 +25,7 @@ import com.jug.junit5.sm.ex2.IContainer;
 import com.jug.junit5.sm.ex2.Ingredient;
 import com.jug.junit5.sm.ex3.ContainerFactory;
 import com.jug.junit5.sm.ex3.ContainerNotFoundException;
+import com.jug.junit5.sm.ex3.Gargantuan;
 import com.jug.junit5.sm.ex3.Standard;
 
 @ExtendWith(MockitoExtension.class)
@@ -164,5 +166,22 @@ public class ContainerFactoryTest {
 		IContainer container = factory.getContainer(mockIngredents);
 		assertThat( container ).isInstanceOf( Standard.class );
 	}
+	@ExtendWith(IgnoreContainerNotFoundException.class)
+	@Test
+	void testIgnoreException() {
+		when( mockIngredents.size()).thenReturn(52);
+		try {
+			factory.getContainer(mockIngredents);
+		} catch (ContainerNotFoundException e) {
+			fail("I should never get here");
+		}
+	}
+	@ExtendWith(ContainerTestExecutionCallback.class)
+	@Test
+	@Tag("extension")
+	void testExtensionPoints() {
+		assertThat(true).isEqualTo(true);
+	}
+	
 	
 }
