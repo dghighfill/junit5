@@ -2,7 +2,6 @@ package com.jug.junit5;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,10 +16,9 @@ class TitleSlideTest {
 		assertThat(speaker).isEqualTo("Dale Highfill");
 	}
 
-	// Note this test is made to intentionally fail because we bore them to death with
-	// 142 slides.
+	// Note this test is made to intentionally fail because I don't plan 
+	// to bore them to death with 142 slides.
 	@Test
-	@Disabled
 	@DisplayName("Should be a long night")
 	void testHowManySlides() {
 		assertThat(slideCount).isEqualTo(142);

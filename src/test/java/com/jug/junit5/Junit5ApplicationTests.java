@@ -2,7 +2,6 @@ package com.jug.junit5;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class Junit5ApplicationTests {
 
-	@Disabled
+//	@Disabled
 	@Test
 	public void contextLoads() {
 		assertThat("true").isEqualTo("true");
