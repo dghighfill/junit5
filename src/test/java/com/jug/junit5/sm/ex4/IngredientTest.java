@@ -56,6 +56,7 @@ class IngredientTest {
 			assertThat(ingredient.getOunces()).isEqualTo(16);
 		}
 
+		// Dependency Injection
 		@Test
 		@DisplayName("A Test Info")
 		void assertTestInfoWithDiplayName(TestInfo info) {
@@ -66,7 +67,7 @@ class IngredientTest {
 		@Test
 		@DisplayName("Why would I ever do this?")
 		void reportSeveralValues(TestReporter reporter) {
-			ingredient.setName("Key Ingrediant");
+			ingredient.setName("Key Ingredient");
 			ingredient.setOunces(16);
 			reporter.publishEntry(ingredient.getName(), Float.toString(ingredient.getOunces()));
 		}

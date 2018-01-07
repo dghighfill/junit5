@@ -19,12 +19,23 @@ public class ContainerFactoryTest {
 	void beforeEach() {
 		factory = new ContainerFactory();
 	}
+	
+	@Test
+	@DisplayName("Factory should be initialized")
+	void testIsNotNull(){
+		assertThat( factory).isNotNull();
+	}
 
 	@Test
 	@DisplayName("Should create a Dinky Container")
 	void getDinkyContainer() throws ContainerNotFoundException {
-		List<Ingredient> ingredients = Arrays.asList(new Ingredient("peanutButter"), new Ingredient("banana"),
+		// @formatter:off
+ 		List<Ingredient> ingredients = Arrays.asList(
+				new Ingredient("peanutButter"), 
+				new Ingredient("banana"),
 				new Ingredient("orange juice"));
+		// @formatter:on
+		
 		IContainer container = factory.getContainer(ingredients);
 
 		assertThat(container).isInstanceOfAny(IContainer.class);
@@ -39,6 +50,6 @@ public class ContainerFactoryTest {
 		assertThatExceptionOfType(ContainerNotFoundException.class).isThrownBy(() -> {
 			factory.getContainer(ingredients);
 		}).withMessage("Unable to create Smoothie Ninja Container")
-		.withCause(new Throwable("Wrong number of Ingredients"));
+		  .withCause(new Throwable("Wrong number of Ingredients"));
 	}
 }

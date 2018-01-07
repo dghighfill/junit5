@@ -14,6 +14,10 @@ public class Ingredient {
 	public Ingredient() {
 	}
 
+	public Ingredient(String name) {
+		this( name, 0f );
+	}
+	
 	public Ingredient(String name, Float ounces) {
 		this.name = name;
 		this.ounces = ounces;

@@ -10,6 +10,7 @@ public class IgnoreContainerNotFoundException implements TestExecutionExceptionH
 	@Override
 	public void handleTestExecutionException(ExtensionContext context, Throwable throwable) throws Throwable {
 		if( throwable instanceof ContainerNotFoundException) {
+			// Eat the exception and just return
 			return;
 		}
 	}

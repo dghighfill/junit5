@@ -1,4 +1,4 @@
-package com.jug.junit5.sm.ex3;
+package com.jug.junit5.sm.ex5;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,10 +1,7 @@
 package com.jug.junit5.sm.ex5;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
-import lombok.ToString;
 
 @Data
 public class LombokIngredient {

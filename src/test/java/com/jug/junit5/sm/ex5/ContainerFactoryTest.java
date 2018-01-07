@@ -20,13 +20,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
 import com.jug.junit5.MockitoExtension;
-import com.jug.junit5.sm.ex2.Dinky;
-import com.jug.junit5.sm.ex2.IContainer;
-import com.jug.junit5.sm.ex2.Ingredient;
-import com.jug.junit5.sm.ex3.ContainerFactory;
-import com.jug.junit5.sm.ex3.ContainerNotFoundException;
-import com.jug.junit5.sm.ex3.Gargantuan;
-import com.jug.junit5.sm.ex3.Standard;
 
 @ExtendWith(MockitoExtension.class)
 public class ContainerFactoryTest {
@@ -59,7 +52,7 @@ public class ContainerFactoryTest {
 
 	@Test
 	@DisplayName("Should NOT be able to create a container if ingredients are invalid.")
-	void getNullContainer() {
+	void testExceptionWithNoIngredients() {
 		List<Ingredient> ingredients = Collections.<Ingredient>emptyList();
 		
 		assertThatExceptionOfType(ContainerNotFoundException.class).isThrownBy(() -> {
@@ -145,6 +138,7 @@ public class ContainerFactoryTest {
 		List<Ingredient> ingredients = Arrays.asList(new Ingredient("A"), new Ingredient("B"));
 		factory.getContainer(ingredients);
 	}
+	
 	@Test
 	@Tag("gargantuan")
 	void testTags() throws ContainerNotFoundException {
@@ -154,6 +148,7 @@ public class ContainerFactoryTest {
 		assertThat(container).isInstanceOf(Standard.class);
 	}
 	
+	// Mockito Extension Model
 	@Test
 	void testMockParameter(@Mock ContainerFactory mockFactory ) throws ContainerNotFoundException {
 		when( mockFactory.getContainer( null )).thenReturn( new Dinky() );
@@ -178,6 +173,7 @@ public class ContainerFactoryTest {
 	}
 	@ExtendWith(ContainerTestExecutionCallback.class)
 	@Test
+	@DisplayName("Callback testing")
 	@Tag("extension")
 	void testExtensionPoints() {
 		assertThat(true).isEqualTo(true);

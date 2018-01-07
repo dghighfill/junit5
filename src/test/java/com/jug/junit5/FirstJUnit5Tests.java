@@ -11,5 +11,4 @@ class FirstJUnit5Tests {
 		assertEquals(4, 1 + 3);
 	}
 
-
 }
