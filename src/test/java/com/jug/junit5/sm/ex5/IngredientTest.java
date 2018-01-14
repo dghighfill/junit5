@@ -9,6 +9,7 @@ import java.util.Collection;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Nested;
@@ -94,6 +95,7 @@ class IngredientTest {
 		}
 
 		@Test
+		@Disabled
 		@DisplayName("A Test Info")
 		void assertTestInfoWithDiplayName(TestInfo info) {
 			assertThat(info.getDisplayName()).isEqualTo("A Test Info");
@@ -101,6 +103,7 @@ class IngredientTest {
 		}
 
 		@Test
+		@Disabled
 		@DisplayName("Why would I ever do this?")
 		void reportSeveralValues(TestReporter reporter) {
 			ingredient.setName("Key Ingrediant");
@@ -109,17 +112,21 @@ class IngredientTest {
 		}
 
 		@RepeatedTest(5)
+		@Disabled
+
 		void testCreatingSeveralIngredients(RepetitionInfo info) {
 			System.out.println(String.format("Repeat %d of %d", info.getCurrentRepetition()
 					                                          , info.getTotalRepetitions()));
 		}
 
 		@RepeatedTest(value = 10, name = RepeatedTest.LONG_DISPLAY_NAME )
+		@Disabled
 		void testRepeatAnnotation(TestInfo info) {
 			System.out.println(String.format(info.getDisplayName() ));
 		}
 		
 		@RepeatedTest(value = 1, name = "{displayName} {currentRepetition}/{totalRepetitions}")
+		@Disabled
 		@DisplayName("Repeat!")
 		void customDisplayName(TestInfo testInfo) {
 			assertThat(testInfo.getDisplayName()).isEqualTo( "Repeat! 1/1");
