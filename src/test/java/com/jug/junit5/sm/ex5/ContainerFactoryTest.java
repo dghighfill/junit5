@@ -163,13 +163,10 @@ public class ContainerFactoryTest {
 	}
 	@ExtendWith(IgnoreContainerNotFoundException.class)
 	@Test
-	void testIgnoreException() {
+	void testIgnoreException() throws ContainerNotFoundException {
 		when( mockIngredents.size()).thenReturn(52);
-		try {
-			factory.getContainer(mockIngredents);
-		} catch (ContainerNotFoundException e) {
-			fail("I should never get here");
-		}
+		factory.getContainer(mockIngredents);
+		fail("I should never get here");
 	}
 	@ExtendWith(ContainerTestExecutionCallback.class)
 	@Test
@@ -178,6 +175,4 @@ public class ContainerFactoryTest {
 	void testExtensionPoints() {
 		assertThat(true).isEqualTo(true);
 	}
-	
-	
 }
