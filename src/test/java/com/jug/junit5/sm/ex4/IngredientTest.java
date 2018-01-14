@@ -32,6 +32,13 @@ class IngredientTest {
 	}
 
 	@Test
+	@DisplayName("Can set ingredients that taste like 💩")
+	void testAwfulIngredients(){
+		ingredient.setName("turnip");
+		assertThat( ingredient.getName()).isEqualTo("turnip");
+	}	
+	
+	@Test
 	void constructWithName() {
 		ingredient = new Ingredient("spinach", 4);
 		assertThat(ingredient.getName()).isEqualTo("spinach");
