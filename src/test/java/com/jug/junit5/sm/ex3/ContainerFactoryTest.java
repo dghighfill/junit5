@@ -15,6 +15,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class ContainerFactoryTest {
 
 	ContainerFactory factory;
@@ -172,6 +175,14 @@ public class ContainerFactoryTest {
 				() -> assertThat(factory.areDinkyContainersAvaiable()).isEqualTo(2),
 				() -> assertThat(factory.areStandardContainersAvaiable()).isEqualTo(3),
 				() -> assertThat(factory.areGargantuanContainersAvaiable()).isEqualTo(2));
+	}
+	@Test
+	@Integration
+	void testSlowIntegrationTest() throws Throwable {
+		log.info("Starting slow test");
+		Thread.sleep(5000);
+		assertThat( factory.howManyContainersAvailable() ).isEqualTo(7);
+		log.info("Finished slow test");
 	}
 
 

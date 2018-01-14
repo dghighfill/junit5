@@ -95,13 +95,11 @@
 						<version>1.0.0-M4</version>
 					</dependency>
 				</dependencies>
-<!-- Uncomment for tag demo 
 				<configuration> 
 					<properties>
-						<includeTags>gargantuan</includeTags> 
+						<!-- <includeTags>gargantuan</includeTags> --> 
 					</properties>
 				 </configuration>
---> 
 			</plugin>
 
 		</plugins>
