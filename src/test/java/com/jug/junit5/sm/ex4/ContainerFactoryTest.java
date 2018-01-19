@@ -1,4 +1,4 @@
-package com.jug.junit5.sm.ex3;
+package com.jug.junit5.sm.ex4;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -9,11 +9,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,7 +47,7 @@ public class ContainerFactoryTest {
 	void getDinkyContainer() throws ContainerNotFoundException {
 		// @formatter:off
 		List<Ingredient> ingredients = Arrays.asList(
-				new Ingredient("peanutButter"), 
+				new Ingredient("peanutButter" ), 
 				new Ingredient("banana"),
 				new Ingredient("orange juice"));
 		// @formatter:on
@@ -89,10 +94,10 @@ public class ContainerFactoryTest {
 	@DisplayName("Should create a Standard Container")
 	void getStandardContainer() throws ContainerNotFoundException {
 		List<Ingredient> ingredients = Arrays.asList(
-				new Ingredient("A"),
-				new Ingredient("B"), 
-				new Ingredient("C"),
-				new Ingredient("D"));
+				new Ingredient("A", 16),
+				new Ingredient("B", 8), 
+				new Ingredient("C", 12),
+				new Ingredient("D", 4));
 		IContainer container = factory.getContainer(ingredients);
 
 		assertThat(container).isInstanceOf(Standard.class);
@@ -178,6 +183,7 @@ public class ContainerFactoryTest {
 
 	@Test
 	@Integration
+	@Disabled
 	void testSlowIntegrationTest() throws Throwable {
 		log.info("Starting slow test");
 		Thread.sleep(5000);
@@ -195,5 +201,22 @@ public class ContainerFactoryTest {
 				() -> assertThat(factory.areGargantuanContainersAvaiable()).isEqualTo(2));
 	}
 
+	@ParameterizedTest
+	@MethodSource("testData")
+	void withMethodSource(List<Ingredient> ingredients, Class<IContainer> clazz ) throws ContainerNotFoundException {
+		IContainer actualContainer = factory.getContainer( ingredients );
+		assertThat(actualContainer).isInstanceOf(clazz);
+	}
+	
+	@SuppressWarnings("unused")
+	private static Stream<Arguments> testData(){
+		return Stream.of(
+				Arguments.of( Arrays.asList(new Ingredient("A"), new Ingredient("B")), Dinky.class ),
+				Arguments.of( Arrays.asList(new Ingredient("A"), new Ingredient("B"), new Ingredient("C"),
+											new Ingredient("D")), Standard.class ),
+				Arguments.of( Arrays.asList(new Ingredient("A"), new Ingredient("B"), new Ingredient("C"),
+						                    new Ingredient("D"), new Ingredient("E"), new Ingredient("F"),
+						                    new Ingredient("G")), Gargantuan.class ) );
+	}
 
 }

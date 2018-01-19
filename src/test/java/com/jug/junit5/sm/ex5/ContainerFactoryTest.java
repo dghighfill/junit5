@@ -161,8 +161,9 @@ public class ContainerFactoryTest {
 		IContainer container = factory.getContainer(mockIngredents);
 		assertThat( container ).isInstanceOf( Standard.class );
 	}
-	@ExtendWith(IgnoreContainerNotFoundException.class)
+	
 	@Test
+	@ExtendWith(IgnoreContainerNotFoundException.class)
 	void testIgnoreException() throws ContainerNotFoundException {
 		when( mockIngredents.size()).thenReturn(52);
 		factory.getContainer(mockIngredents);
