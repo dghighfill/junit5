@@ -198,6 +198,4 @@ public class ContainerFactoryTest {
 				() -> assertThat(factory.areStandardContainersAvaiable()).isEqualTo(3),
 				() -> assertThat(factory.areGargantuanContainersAvaiable()).isEqualTo(2));
 	}
-
-
 }

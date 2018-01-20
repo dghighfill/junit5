@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class TitleSlideTest {
 
 	private String speaker = "Dale Highfill";
-	private int slideCount = 44;
+	private int slideCount = 50;
 
 	@Test
 	void testForPresenter() {
@@ -18,7 +18,7 @@ class TitleSlideTest {
 	// to bore them to death with 142 slides.
 	@Test
 	void testShouldBeALongPresentation() {
-		assertThat(slideCount).isEqualTo(44);
+		assertThat(slideCount).isEqualTo(178);
 	}
 
 }
