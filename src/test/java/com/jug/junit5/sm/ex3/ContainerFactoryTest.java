@@ -2,6 +2,7 @@ package com.jug.junit5.sm.ex3;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
@@ -166,10 +167,12 @@ public class ContainerFactoryTest {
 	}
 	
 
-	
-	@Test
+	// Run this test with a JUnit 4 runner in STS  Notice the 
+	// Results window changing from JUnit 4 to JUnit5
+	@org.junit.Test
 	@Tag("gargantuan")
-	void testTags() throws ContainerNotFoundException {
+	public void testTags() throws ContainerNotFoundException {
+		factory = new ContainerFactory();
 		List<Ingredient> ingredients = Arrays.asList(new Ingredient("A"), new Ingredient("B"), new Ingredient("C"),
 				new Ingredient("D"));
 		IContainer container = factory.getContainer(ingredients);
