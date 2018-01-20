@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class AssertGenerationTest {
 	
+	// To see the Assertion messages, change the value to "b" and run the tests
 	private String A = "a";
 	@Test
 	void firstGeneration() {
@@ -23,7 +24,9 @@ public class AssertGenerationTest {
 	
 	@Test
 	void thirdGeneration() {
-		assertThat( A ).isEqualTo( "a" );
+		// Comment out the first one to show the difference.
+		assertThat( A ).as("Making sure my strings match").isEqualTo( "a" );
+		assertThat( A ).as("Making sure my strings match").contains( "a" );
 	}
 	@Test
 	void thirdGenerationList() {

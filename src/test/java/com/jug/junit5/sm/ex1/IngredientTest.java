@@ -24,7 +24,7 @@ class IngredientTest {
 	@Test
 	@Disabled("WIP")
 	void skippedTest() {
-
+		fail("This test is work in progress");
 	}
 	
 	@Test

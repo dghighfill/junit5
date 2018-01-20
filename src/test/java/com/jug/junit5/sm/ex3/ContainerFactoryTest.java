@@ -2,7 +2,6 @@ package com.jug.junit5.sm.ex3;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
@@ -139,8 +138,10 @@ public class ContainerFactoryTest {
 		List<IContainer> containers = new ArrayList<IContainer>();
 		Collections.addAll(containers, new Dinky());
 		factory.setContainers(containers);
+		assertThat(factory.areDinkyContainersAvaiable()).isEqualTo(1);
 		List<Ingredient> ingredients = Arrays.asList(new Ingredient("A"));
 		factory.getContainer(ingredients);
+		assertThat(factory.areDinkyContainersAvaiable()).isEqualTo(0);
 		
 		assertThatExceptionOfType(ContainerNotFoundException.class).isThrownBy(() -> {
 			factory.getContainer(ingredients);

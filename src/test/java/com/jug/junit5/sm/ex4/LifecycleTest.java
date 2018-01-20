@@ -37,7 +37,7 @@ public class LifecycleTest {
 	class MinorVersion {
 		int minorVersion = 0;
 		
-		@BeforeAll
+		@BeforeAll  // Only can be used with @Nested class with Lifecycle.PER_CLASS
 		void minorBeforeAll(TestInfo info)
 		{
 			log.info("BeforeAll " + info.getDisplayName() );
@@ -50,11 +50,17 @@ public class LifecycleTest {
 		}
 		
 		@Test
-		void testMiorVersion2() {
+		void testMinorVersion2() {
 			assertThat( getVersion()).isEqualTo("2.1");
 			minorVersion++;
 		}
 		
+		@Test
+		void testMajorMinorVersion2() {
+			majorVersion++;
+			assertThat( getVersion()).isEqualTo("3.2");
+			
+		}
 		private String getVersion() {
 			return String.format( "%d.%d", majorVersion, minorVersion );
 		}

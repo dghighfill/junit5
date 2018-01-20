@@ -17,6 +17,9 @@ import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestReporter;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @DisplayName("Ingrediant class tests")
 class IngredientTest {
 
@@ -69,6 +72,7 @@ class IngredientTest {
 		void assertTestInfoWithDiplayName(TestInfo info) {
 			assertThat(info.getDisplayName()).isEqualTo("A Test Info");
 			assertThat(info.getTestMethod().get().getName()).isEqualTo("assertTestInfoWithDiplayName");
+			log.info("TestInfo -> " + info);
 		}
 
 		@Test

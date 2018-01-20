@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mock;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -204,6 +203,7 @@ public class ContainerFactoryTest {
 				() -> assertThat(factory.areGargantuanContainersAvaiable()).isEqualTo(2));
 	}
 
+	// Start of Exercise 4
 	@ParameterizedTest
 	@MethodSource("testData")
 	void withMethodSource(List<Ingredient> ingredients, Class<IContainer> clazz ) throws ContainerNotFoundException {
@@ -233,6 +233,7 @@ public class ContainerFactoryTest {
 
 	@SuppressWarnings("unused")
 	private static Stream<Arguments> testMockData(){
+		@SuppressWarnings("unchecked")
 		List<Ingredient> mockIngredents = mock(List.class);
 		return Stream.of(
 				Arguments.of( mockIngredents, 1, Dinky.class ),

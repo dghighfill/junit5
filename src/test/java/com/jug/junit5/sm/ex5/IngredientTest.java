@@ -2,6 +2,7 @@ package com.jug.junit5.sm.ex5;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.fail;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -36,7 +37,15 @@ class IngredientTest {
 	void testNotNull() {
 		assertThat(ingredient).as("Test that ingredient is created!").isNotNull();
 	}
-
+	
+	@Test
+	@Disabled("WIP")
+	void skippedTest() {
+		// Deactive disabled tests by using this VM argument
+		// -Djunit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
+		fail("This test is work in progress");
+	}
+	
 	@Test
 	@DisplayName("Can set ingredients that taste like 💩")
 	void testAwfulIngredients(){

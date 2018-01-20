@@ -43,4 +43,11 @@ class LombokIngredientTest {
 		}).withMessage("ounces");
 
 	}
+	
+	@Test
+	void testToString() {
+		ingredient.setName("lombok");
+		ingredient.setOunces(8f);
+		assertThat( ingredient.toString() ).isEqualTo("LombokIngredient(name=lombok, ounces=8.0)");
+	}
 }
