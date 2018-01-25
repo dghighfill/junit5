@@ -171,6 +171,7 @@ public class ContainerFactoryTest {
 	// Run this test with a JUnit 4 runner in STS  Notice the 
 	// Results window changing from JUnit 4 to JUnit5
 	@org.junit.Test
+	@Test
 	@Tag("gargantuan")
 	public void testTags() throws ContainerNotFoundException {
 		factory = new ContainerFactory();

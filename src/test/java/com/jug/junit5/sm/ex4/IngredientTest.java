@@ -66,7 +66,7 @@ class IngredientTest {
 			assertThat(ingredient.getOunces()).isEqualTo(16);
 		}
 
-		// Dependency Injection
+		// Exercise 4 Dependency Injection
 		@Test
 		@DisplayName("A Test Info")
 		void assertTestInfoWithDiplayName(TestInfo info) {

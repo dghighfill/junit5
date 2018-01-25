@@ -22,6 +22,7 @@ class IngredientTest {
 	}
 
 	@Test
+	@DisplayName("This test won't run till I'm done working on it.")
 	@Disabled("WIP")
 	void skippedTest() {
 		fail("This test is work in progress");
