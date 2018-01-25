@@ -16,7 +16,7 @@ class TitleSlideTest {
 
 	@Test
 	void testShouldBeALongPresentation() {
-		assertThat(slideCount).isEqualTo(178);
+		assertThat(slideCount).isEqualTo(51);
 	}
 
 }
