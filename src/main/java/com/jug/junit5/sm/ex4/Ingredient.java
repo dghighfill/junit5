@@ -8,6 +8,9 @@ public class Ingredient {
 	public Ingredient() {
 	}
 
+	public Ingredient( String name ) {
+		this( name, 0 );
+	}
 	public Ingredient(String name, float ounces) {
 		this.name = name;
 		this.ounces = ounces;

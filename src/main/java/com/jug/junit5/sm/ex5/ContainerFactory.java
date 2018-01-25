@@ -74,7 +74,6 @@ public class ContainerFactory {
 					new Throwable("All containers are dirty"));
 		}
 		return dinkyContainer;
-
 	}
 
 }

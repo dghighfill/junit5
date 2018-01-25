@@ -46,7 +46,7 @@ public class ContainerFactoryTest {
 	@DisplayName("Should NOT be able to create a container if ingredients are invalid.")
 	void getNullContainer() {
 		List<Ingredient> ingredients = Collections.<Ingredient>emptyList();
-		
+		//AssertJ Exception Checking
 		assertThatExceptionOfType(ContainerNotFoundException.class).isThrownBy(() -> {
 			factory.getContainer(ingredients);
 		}).withMessage("Unable to create Smoothie Ninja Container")

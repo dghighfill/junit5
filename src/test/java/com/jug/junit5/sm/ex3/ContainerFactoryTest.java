@@ -88,7 +88,10 @@ public class ContainerFactoryTest {
 	@Test
 	@DisplayName("Should create a Standard Container")
 	void getStandardContainer() throws ContainerNotFoundException {
-		List<Ingredient> ingredients = Arrays.asList(new Ingredient("A"), new Ingredient("B"), new Ingredient("C"),
+		List<Ingredient> ingredients = Arrays.asList(
+				new Ingredient("A"),
+				new Ingredient("B"), 
+				new Ingredient("C"),
 				new Ingredient("D"));
 		IContainer container = factory.getContainer(ingredients);
 
@@ -100,9 +103,14 @@ public class ContainerFactoryTest {
 	void getGargantuanContainer() throws ContainerNotFoundException {
 		// @formatter:off
 		List<Ingredient> ingredients = Arrays.asList(
-				new Ingredient("A"), new Ingredient("B"), new Ingredient("C"),
-				new Ingredient("D"), new Ingredient("E"), new Ingredient("F"), 
-				new Ingredient("G"), new Ingredient("H"));
+				new Ingredient("A"),
+				new Ingredient("B"), 
+				new Ingredient("C"),
+				new Ingredient("D"), 
+				new Ingredient("E"), 
+				new Ingredient("F"), 
+				new Ingredient("G"), 
+				new Ingredient("H"));
 		// @formatter:on
 
 		IContainer container = factory.getContainer(ingredients);
@@ -130,8 +138,10 @@ public class ContainerFactoryTest {
 		List<IContainer> containers = new ArrayList<IContainer>();
 		Collections.addAll(containers, new Dinky());
 		factory.setContainers(containers);
+		assertThat(factory.areDinkyContainersAvaiable()).isEqualTo(1);
 		List<Ingredient> ingredients = Arrays.asList(new Ingredient("A"));
 		factory.getContainer(ingredients);
+		assertThat(factory.areDinkyContainersAvaiable()).isEqualTo(0);
 		
 		assertThatExceptionOfType(ContainerNotFoundException.class).isThrownBy(() -> {
 			factory.getContainer(ingredients);
@@ -140,6 +150,7 @@ public class ContainerFactoryTest {
 	}
 	
 	@Test
+	@DisplayName("Only run tests if Dinky Containers are available.")
 	void assumeDinkyContainersAreAvailable() throws ContainerNotFoundException {
 		List<IContainer> containers = new ArrayList<IContainer>();
 		Collections.addAll(containers, new Standard(), new Gargantuan());
@@ -157,14 +168,26 @@ public class ContainerFactoryTest {
 	}
 	
 
-	
+	// Run this test with a JUnit 4 runner in STS  Notice the 
+	// Results window changing from JUnit 4 to JUnit5
+	@org.junit.Test
 	@Test
 	@Tag("gargantuan")
-	void testTags() throws ContainerNotFoundException {
+	public void testTags() throws ContainerNotFoundException {
+		factory = new ContainerFactory();
 		List<Ingredient> ingredients = Arrays.asList(new Ingredient("A"), new Ingredient("B"), new Ingredient("C"),
 				new Ingredient("D"));
 		IContainer container = factory.getContainer(ingredients);
 		assertThat(container).isInstanceOf(Standard.class);
+	}
+
+	@Test
+	@Integration
+	void testSlowIntegrationTest() throws Throwable {
+		log.info("Starting slow test");
+		Thread.sleep(5000);
+		assertThat( factory.howManyContainersAvailable() ).isEqualTo(7);
+		log.info("Finished slow test");
 	}
 
 	// Alternatively I could test all the initialization in one test
@@ -176,14 +199,4 @@ public class ContainerFactoryTest {
 				() -> assertThat(factory.areStandardContainersAvaiable()).isEqualTo(3),
 				() -> assertThat(factory.areGargantuanContainersAvaiable()).isEqualTo(2));
 	}
-	@Test
-	@Integration
-	void testSlowIntegrationTest() throws Throwable {
-		log.info("Starting slow test");
-		Thread.sleep(5000);
-		assertThat( factory.howManyContainersAvailable() ).isEqualTo(7);
-		log.info("Finished slow test");
-	}
-
-
 }

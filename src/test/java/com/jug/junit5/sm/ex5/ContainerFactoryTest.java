@@ -148,6 +148,7 @@ public class ContainerFactoryTest {
 		assertThat(container).isInstanceOf(Standard.class);
 	}
 	
+	// Exercise 5
 	// Mockito Extension Model
 	@Test
 	void testMockParameter(@Mock ContainerFactory mockFactory ) throws ContainerNotFoundException {
@@ -155,17 +156,20 @@ public class ContainerFactoryTest {
 		IContainer container = mockFactory.getContainer(null);
 		assertThat( container ).isInstanceOf( Dinky.class );
 	}
+	
+	// Testing with a mockAttribute of the test class.
 	@Test
 	void testMockAttribute() throws ContainerNotFoundException {
 		when( mockIngredents.size()).thenReturn(4);
 		IContainer container = factory.getContainer(mockIngredents);
 		assertThat( container ).isInstanceOf( Standard.class );
 	}
-	@ExtendWith(IgnoreContainerNotFoundException.class)
+	
 	@Test
+	@ExtendWith(IgnoreContainerNotFoundException.class)
 	void testIgnoreException() throws ContainerNotFoundException {
 		when( mockIngredents.size()).thenReturn(52);
-		factory.getContainer(mockIngredents);
+		factory.getContainer(mockIngredents);  // This stops processing of the test
 		fail("I should never get here");
 	}
 	@ExtendWith(ContainerTestExecutionCallback.class)

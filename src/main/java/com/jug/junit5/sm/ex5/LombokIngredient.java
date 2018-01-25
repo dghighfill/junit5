@@ -7,7 +7,8 @@ import lombok.NonNull;
 public class LombokIngredient {
 
 	private String name;
-	@NonNull private Float ounces;
+	@NonNull 
+	private Float ounces;
 
 	public LombokIngredient() {
 	}

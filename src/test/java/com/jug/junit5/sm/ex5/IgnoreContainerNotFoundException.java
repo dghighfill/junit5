@@ -12,7 +12,7 @@ public class IgnoreContainerNotFoundException implements TestExecutionExceptionH
 	public void handleTestExecutionException(ExtensionContext context, Throwable throwable) throws Throwable {
 		if( throwable instanceof ContainerNotFoundException) {
 			// Eat the exception and just return
-			log.info("Discarding ContainerNotFoundException -" + throwable.getMessage() );
+			log.info("Discarding ContainerNotFoundException - " + throwable.getMessage() );
 			return;
 		}
 	}

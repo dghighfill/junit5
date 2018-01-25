@@ -1,4 +1,4 @@
-package com.jug.junit5.sm.ex5;
+package com.jug.junit5.sm.ex4;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @TestInstance(Lifecycle.PER_CLASS)
+@DisplayName("Major Version Test")
 public class LifecycleTest {
 	
 	int majorVersion = 0;
@@ -31,12 +32,12 @@ public class LifecycleTest {
 	}
 	
 	@Nested
-	@DisplayName("Nested Class")
+	@DisplayName("Minor Version Test")
 	@TestInstance(Lifecycle.PER_CLASS)
 	class MinorVersion {
 		int minorVersion = 0;
 		
-		@BeforeAll
+		@BeforeAll  // Only can be used with @Nested class with Lifecycle.PER_CLASS
 		void minorBeforeAll(TestInfo info)
 		{
 			log.info("BeforeAll " + info.getDisplayName() );
@@ -45,14 +46,21 @@ public class LifecycleTest {
 		@Test
 		void testMinorVersion() {
 			assertThat( getVersion()).isEqualTo("2.0");
+			minorVersion++;
 		}
 		
 		@Test
-		void testMiorVersion2() {
-			minorVersion++;
+		void testMinorVersion2() {
 			assertThat( getVersion()).isEqualTo("2.1");
+			minorVersion++;
 		}
 		
+		@Test
+		void testMajorMinorVersion2() {
+			majorVersion++;
+			assertThat( getVersion()).isEqualTo("3.2");
+			
+		}
 		private String getVersion() {
 			return String.format( "%d.%d", majorVersion, minorVersion );
 		}

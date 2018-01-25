@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.jug.junit5.sm.ex2.Dinky;
-import com.jug.junit5.sm.ex2.IContainer;
-import com.jug.junit5.sm.ex2.Ingredient;
-
 public class ContainerFactory {
 
 	private List<IContainer> containers = new ArrayList<IContainer>();
