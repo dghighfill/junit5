@@ -223,6 +223,7 @@ public class ContainerFactoryTest {
 	}
 	
 	@DisplayName("Testing with mock ingredients")
+	// zero based index of parameters
 	@ParameterizedTest(name="{1} ingredients yields {2} container")
 	@MethodSource("testMockData")
 	void withMockedMethodSource(List<Ingredient> mockIngredents, int numberOf, Class<IContainer> clazz ) throws ContainerNotFoundException {

@@ -18,6 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 public class LifecycleTest {
 	
 	int majorVersion = 0;
+	
+	@BeforeAll
+	void beforeAll( TestInfo info ) {
+		log.info("BeforeAll " + info.getDisplayName() );
+	}
 
 	@Test
 	void testCount1() {
