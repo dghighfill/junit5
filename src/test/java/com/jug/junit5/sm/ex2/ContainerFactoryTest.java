@@ -38,7 +38,6 @@ public class ContainerFactoryTest {
 		
 		IContainer container = factory.getContainer(ingredients);
 
-		assertThat(container).isInstanceOfAny(IContainer.class);
 		assertThat(container).isInstanceOf(Dinky.class);
 	}
 

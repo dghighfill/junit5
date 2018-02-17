@@ -49,7 +49,6 @@ public class ContainerFactoryTest {
 
 		IContainer container = factory.getContainer(ingredients);
 
-		assertThat(container).isInstanceOfAny(IContainer.class);
 		assertThat(container).isInstanceOf(Dinky.class);
 	}
 
@@ -138,6 +137,7 @@ public class ContainerFactoryTest {
 		List<IContainer> containers = new ArrayList<IContainer>();
 		Collections.addAll(containers, new Dinky());
 		factory.setContainers(containers);
+		
 		assertThat(factory.areDinkyContainersAvaiable()).isEqualTo(1);
 		List<Ingredient> ingredients = Arrays.asList(new Ingredient("A"));
 		factory.getContainer(ingredients);
@@ -149,6 +149,7 @@ public class ContainerFactoryTest {
 		  .withCause(new Throwable("All containers are dirty"));
 	}
 	
+	// Next Slide
 	@Test
 	@DisplayName("Only run tests if Dinky Containers are available.")
 	void assumeDinkyContainersAreAvailable() throws ContainerNotFoundException {
