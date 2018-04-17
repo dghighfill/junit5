@@ -53,16 +53,16 @@ public class ContainerFactoryTest {
 	}
 
 	@Test
-	@DisplayName("Should NOT be able to create a container if ingredients are invalid.")
+	@DisplayName("Should NOT be able to create a container if there are no ingredients.")
 	void getNullContainer() {
 		List<Ingredient> ingredients = Collections.<Ingredient>emptyList();
-
+		//AssertJ Exception Checking
 		assertThatExceptionOfType(ContainerNotFoundException.class).isThrownBy(() -> {
 			factory.getContainer(ingredients);
 		}).withMessage("Unable to create Smoothie Ninja Container")
 		  .withCause(new Throwable("Wrong number of Ingredients"));
 	}
-
+	
 	@Test
 	void testHowContainersAvaialable() {
 		assertThat(factory.howManyContainersAvailable()).isEqualTo(7);
@@ -167,7 +167,7 @@ public class ContainerFactoryTest {
 		List<Ingredient> ingredients = Arrays.asList(new Ingredient("A"), new Ingredient("B"));
 		factory.getContainer(ingredients);
 	}
-	
+	// Next Slide
 
 	// Run this test with a JUnit 4 runner in STS  Notice the 
 	// Results window changing from JUnit 4 to JUnit5
@@ -177,9 +177,9 @@ public class ContainerFactoryTest {
 	public void testTags() throws ContainerNotFoundException {
 		factory = new ContainerFactory();
 		List<Ingredient> ingredients = Arrays.asList(new Ingredient("A"), new Ingredient("B"), new Ingredient("C"),
-				new Ingredient("D"));
+				new Ingredient("D"),new Ingredient("E"),new Ingredient("F"),new Ingredient("G"));
 		IContainer container = factory.getContainer(ingredients);
-		assertThat(container).isInstanceOf(Standard.class);
+		assertThat(container).isInstanceOf(Gargantuan.class);
 	}
 
 	@Test
@@ -191,6 +191,7 @@ public class ContainerFactoryTest {
 		log.info("Finished slow test");
 	}
 
+	// Next Slide
 	// Alternatively I could test all the initialization in one test
 	@Test
 	void testFactoryInitialization() {

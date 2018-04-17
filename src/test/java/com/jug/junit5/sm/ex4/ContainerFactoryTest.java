@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -206,7 +204,7 @@ public class ContainerFactoryTest {
 	// Start of Exercise 4
 	@ParameterizedTest
 	@MethodSource("testData")
-	void withMethodSource(List<Ingredient> ingredients, Class<IContainer> clazz ) throws ContainerNotFoundException {
+	void testWithMethodSource(List<Ingredient> ingredients, Class<IContainer> clazz ) throws ContainerNotFoundException {
 		IContainer actualContainer = factory.getContainer( ingredients );
 		assertThat(actualContainer).isInstanceOf(clazz);
 	}
@@ -220,33 +218,5 @@ public class ContainerFactoryTest {
 				Arguments.of( Arrays.asList(new Ingredient("A"), new Ingredient("B"), new Ingredient("C"),
 						                    new Ingredient("D"), new Ingredient("E"), new Ingredient("F"),
 						                    new Ingredient("G")), Gargantuan.class ) );
-	}
-	
-	@DisplayName("Testing with mock ingredients")
-	// zero based index of parameters
-	@ParameterizedTest(name="{1} ingredients yields {2} container")
-	@MethodSource("testMockData")
-	void withMockedMethodSource(List<Ingredient> mockIngredents, int numberOf, Class<IContainer> clazz ) throws ContainerNotFoundException {
-		when( mockIngredents.size()).thenReturn(numberOf);
-		IContainer actualContainer = factory.getContainer( mockIngredents );
-		assertThat(actualContainer).isInstanceOf(clazz);
-	}
-
-	@SuppressWarnings("unused")
-	private static Stream<Arguments> testMockData(){
-		@SuppressWarnings("unchecked")
-		List<Ingredient> mockIngredents = mock(List.class);
-		return Stream.of(
-				Arguments.of( mockIngredents, 1, Dinky.class ),
-				Arguments.of( mockIngredents, 2, Dinky.class ),
-				Arguments.of( mockIngredents, 3, Dinky.class ),
-				Arguments.of( mockIngredents, 4, Standard.class ),
-				Arguments.of( mockIngredents, 5, Standard.class ),
-				Arguments.of( mockIngredents, 6, Standard.class ),
-				Arguments.of( mockIngredents, 7, Gargantuan.class ),
-				Arguments.of( mockIngredents, 8, Gargantuan.class ),
-				Arguments.of( mockIngredents, 9, Gargantuan.class ),
-				Arguments.of( mockIngredents, 10, Gargantuan.class ),
-				Arguments.of( mockIngredents, 11, Gargantuan.class ) );
 	}
 }
