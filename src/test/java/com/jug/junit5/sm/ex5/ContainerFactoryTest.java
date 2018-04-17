@@ -5,21 +5,32 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 
 import com.jug.junit5.MockitoExtension;
+import com.jug.junit5.sm.ex5.ContainerNotFoundException;
+import com.jug.junit5.sm.ex5.Dinky;
+import com.jug.junit5.sm.ex5.Gargantuan;
+import com.jug.junit5.sm.ex5.IContainer;
+import com.jug.junit5.sm.ex5.Ingredient;
+import com.jug.junit5.sm.ex5.Standard;
 
 @ExtendWith(MockitoExtension.class)
 public class ContainerFactoryTest {
@@ -147,9 +158,36 @@ public class ContainerFactoryTest {
 		IContainer container = factory.getContainer(ingredients);
 		assertThat(container).isInstanceOf(Standard.class);
 	}
-	
 	// Exercise 5
 	// Mockito Extension Model
+	// JUnit 5.1 feature
+	@DisplayName("Testing with mock ingredients")
+	// zero based index of parameters
+	@ParameterizedTest(name="{1} ingredients yields {2} container")
+	@MethodSource
+	void testWithMockedMethodSource(List<Ingredient> mockIngredents, int numberOf, Class<IContainer> clazz ) throws ContainerNotFoundException {
+		when( mockIngredents.size()).thenReturn(numberOf);
+		IContainer actualContainer = factory.getContainer( mockIngredents );
+		assertThat(actualContainer).isInstanceOf(clazz);
+	}
+
+	@SuppressWarnings("unused")
+	private static Stream<Arguments> testWithMockedMethodSource(){
+		@SuppressWarnings("unchecked")
+		List<Ingredient> mockIngredents = mock(List.class);
+		return Stream.of(
+				Arguments.of( mockIngredents, 1, Dinky.class ),
+				Arguments.of( mockIngredents, 2, Dinky.class ),
+				Arguments.of( mockIngredents, 3, Dinky.class ),
+				Arguments.of( mockIngredents, 4, Standard.class ),
+				Arguments.of( mockIngredents, 5, Standard.class ),
+				Arguments.of( mockIngredents, 6, Standard.class ),
+				Arguments.of( mockIngredents, 7, Gargantuan.class ),
+				Arguments.of( mockIngredents, 8, Gargantuan.class ),
+				Arguments.of( mockIngredents, 9, Gargantuan.class ),
+				Arguments.of( mockIngredents, 10, Gargantuan.class ),
+				Arguments.of( mockIngredents, 11, Gargantuan.class ) );
+	}	
 	@Test
 	void testMockParameter(@Mock ContainerFactory mockFactory ) throws ContainerNotFoundException {
 		when( mockFactory.getContainer( null )).thenReturn( new Dinky() );

@@ -42,9 +42,24 @@ public class ContainerFactoryTest {
 	}
 
 	@Test
-	@DisplayName("Should NOT be able to create a container if ingredients are invalid.")
+	@DisplayName("Should NOT be able to create a container if there are no ingredients.")
 	void getNullContainer() {
 		List<Ingredient> ingredients = Collections.<Ingredient>emptyList();
+		//AssertJ Exception Checking
+		assertThatExceptionOfType(ContainerNotFoundException.class).isThrownBy(() -> {
+			factory.getContainer(ingredients);
+		}).withMessage("Unable to create Smoothie Ninja Container")
+		  .withCause(new Throwable("Wrong number of Ingredients"));
+	}
+	
+	@Test
+	@DisplayName("Should NOT be able to create a container if there are too many ingredients.")
+	void getNullContainerWithTooManyIngredients() {
+		List<Ingredient> ingredients = Arrays.asList(
+				new Ingredient("peanutButter"), 
+				new Ingredient("banana"),
+				new Ingredient("orange juice"),
+				new Ingredient("apples"));
 		//AssertJ Exception Checking
 		assertThatExceptionOfType(ContainerNotFoundException.class).isThrownBy(() -> {
 			factory.getContainer(ingredients);

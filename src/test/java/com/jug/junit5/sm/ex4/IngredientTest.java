@@ -30,6 +30,7 @@ class IngredientTest {
 		ingredient = new Ingredient();
 	}
 
+	@Test
 	void testNotNull() {
 		assertThat(ingredient).as("Test that ingredient is created!").isNotNull();
 	}
@@ -66,6 +67,7 @@ class IngredientTest {
 			assertThat(ingredient.getOunces()).isEqualTo(16);
 		}
 
+		// Next Slide
 		// Exercise 4 Dependency Injection
 		@Test
 		@DisplayName("A Test Info")
@@ -100,6 +102,7 @@ class IngredientTest {
 			assertThat(testInfo.getDisplayName()).isEqualTo( "Repeat! 1/1");
 		}
 		
+		// Next Slide
 	    @TestFactory
 	    Collection<DynamicTest> dynamicTests() {
 			ingredient.setName("Key Ingredient");

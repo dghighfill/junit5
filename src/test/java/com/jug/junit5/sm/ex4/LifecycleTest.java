@@ -3,6 +3,7 @@ package com.jug.junit5.sm.ex4;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,12 @@ public class LifecycleTest {
 	
 	@BeforeAll
 	void beforeAll( TestInfo info ) {
-		log.info("BeforeAll " + info.getDisplayName() );
+		log.info(String.format( "%s BeforeAll: majorVersion %d ", info.getDisplayName(), this.majorVersion  ));
+	}
+	
+	@BeforeEach
+	void beforeEach( TestInfo info ) {
+		log.info(String.format( "%s BeforeEach: majorVersion %d ", info.getDisplayName(), this.majorVersion  ));
 	}
 
 	@Test
